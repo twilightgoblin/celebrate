@@ -5,6 +5,7 @@ import Lenis from 'lenis';
 import Grainient from '../components/Grainient';
 import TextHighlighter from '@/components/ui/text-highlighter';
 import Navbar from '../components/Navbar';
+import About from './about';
 
 export default function Hero() {
   const textRef = useRef(null);
@@ -12,39 +13,38 @@ export default function Hero() {
   useEffect(() => {
     // Initialize Lenis smooth scrolling
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.5,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smooth: true,
+      smoothTouch: false,
     });
+
+    // Handle scroll animation with Lenis
+    const handleScroll = (time) => {
+      if (!textRef.current) return;
+      
+      const scrollY = lenis.scroll;
+      const windowHeight = window.innerHeight;
+      
+      // Move text upward faster - completes within 1 viewport height
+      const translateY = -(scrollY * 1);
+      
+      // Opacity decreases/increases much faster - fade completes within 30% of viewport
+      const opacity = Math.max(0, 1 - (scrollY / (windowHeight * 0.3)) * 1.5);
+      
+      textRef.current.style.transform = `translateY(${translateY}px)`;
+      textRef.current.style.opacity = opacity;
+    };
 
     function raf(time) {
       lenis.raf(time);
+      handleScroll(time);
       requestAnimationFrame(raf);
     }
 
     requestAnimationFrame(raf);
-
-    // Handle scroll animation
-    const handleScroll = () => {
-      if (!textRef.current) return;
-      
-      const scrollY = window.scrollY;
-      const windowHeight = window.innerHeight;
-      
-      // Scale increases as you scroll
-      const scale = 1 + (scrollY / windowHeight) * 2;
-      
-      // Opacity decreases as you scroll - adjusted to fade later
-      const opacity = Math.max(0, 1 - (scrollY / windowHeight) * 0.8);
-      
-      textRef.current.style.transform = `scale(${scale})`;
-      textRef.current.style.opacity = opacity;
-    };
-
-    window.addEventListener('scroll', handleScroll);
     
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       lenis.destroy();
     };
   }, []);
@@ -96,11 +96,11 @@ export default function Hero() {
         </div>
       </div>
       {/* Add extra content to enable scrolling */}
-      <div style={{ height: '200vh', position: 'relative', zIndex: 2, pointerEvents: 'none' }}>
+      <div style={{ height: '100vh', position: 'relative', zIndex: 2, pointerEvents: 'none' }}>
         {/* Spacer for scroll effect */}
       </div>
-      <div style={{ height: '100vh', position: 'relative', zIndex: 2 }}>
-        {/* Your next section content goes here */}
+      <div style={{ position: 'relative', zIndex: 2 }}>
+        <About />
       </div>
     </>
   );
