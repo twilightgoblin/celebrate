@@ -73,8 +73,8 @@ export default function About() {
     <section 
       className="relative px-4 sm:px-6 lg:px-8"
       style={{ 
-        backgroundColor: '#FFD9C7',
-        background: 'linear-gradient(180deg, transparent 0%, rgba(255, 177, 153, 0.15) 15%, rgba(255, 200, 180, 0.4) 30%, rgba(255, 217, 199, 0.7) 50%, #FFD9C7 75%, #FFCDB5 100%)',
+        backgroundColor: 'transparent',
+        background: 'linear-gradient(180deg, transparent 0%, rgba(255, 177, 153, 0.08) 2%, rgba(255, 200, 180, 0.25) 6%, rgba(255, 217, 199, 0.5) 12%, #FFD9C7 22%, #FFCDB5 50%, rgba(224, 122, 102, 0.15) 80%, rgba(224, 122, 102, 0.25) 100%)',
         minHeight: '600vh'
       }}
     >
