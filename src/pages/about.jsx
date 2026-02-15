@@ -2,14 +2,19 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Sparkles, Palette, Monitor, Link2, PartyPopper } from 'lucide-react';
+import { motion, useInView } from 'motion/react';
 
 export default function About() {
   const secondParaRef = useRef(null);
   const cardsContainerRef = useRef(null);
   const sectionRef = useRef(null);
+  const headingRef = useRef(null);
+  const firstParaRef = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isHorizontalComplete, setIsHorizontalComplete] = useState(false);
   const [cardWidth, setCardWidth] = useState(340);
+  
+  const headingInView = useInView(headingRef, { amount: 0.3 });
+  const firstParaInView = useInView(firstParaRef, { amount: 0.3 });
 
   const cards = [
     {
@@ -73,16 +78,8 @@ export default function About() {
         const scrollMultiplier = window.innerHeight * 2.5;
         const progress = Math.min(distanceFromNavbar / scrollMultiplier, 1);
         setScrollProgress(progress);
-        
-        // Mark complete when last card is centered
-        if (progress >= 0.99 && !isHorizontalComplete) {
-          setIsHorizontalComplete(true);
-        }
       } else if (!paraReachedNavbar) {
         setScrollProgress(0);
-        if (isHorizontalComplete) {
-          setIsHorizontalComplete(false);
-        }
       }
     };
 
@@ -118,45 +115,72 @@ export default function About() {
       style={{ 
         backgroundColor: 'transparent',
         background: 'linear-gradient(180deg, transparent 0%, rgba(255, 177, 153, 0.08) 2%, rgba(255, 200, 180, 0.25) 6%, rgba(255, 217, 199, 0.5) 12%, #FFD9C7 22%, #FFCDB5 50%, rgba(224, 122, 102, 0.15) 80%, rgba(224, 122, 102, 0.25) 100%)',
-        height: isHorizontalComplete ? 'auto' : '450vh',
-        paddingBottom: isHorizontalComplete ? '4rem' : '0'
+        height: '450vh'
       }}
     >
       <div className="max-w-4xl mx-auto pt-16 sm:pt-20 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12">
-          <h2 
+          <motion.h2
+            ref={headingRef}
+            initial={{ opacity: 0, y: 30 }}
+            animate={headingInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6"
             style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-heading)' }}
           >
             About Us
-          </h2>
+          </motion.h2>
         </div>
         
         <div className="space-y-6 sm:space-y-8 mb-12 sm:mb-16">
-          <p 
+          <motion.p
+            ref={firstParaRef}
+            initial={{ opacity: 0, y: 20 }}
+            animate={firstParaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-center"
             style={{ fontFamily: 'var(--font-body)', color: 'var(--text-body)' }}
           >
-            At <span className="font-semibold" style={{ color: 'var(--text-heading)' }}>Celebrate</span>, we transform your special moments into beautifully crafted digital experiences. We are a done-for-you invitation design agency—meaning you simply share your vision, and we take care of everything from concept to final delivery.
-          </p>
+            At <motion.span 
+              className="font-semibold" 
+              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+              style={{ display: 'inline-block', color: 'var(--text-heading)' }}
+            >
+              Celebrate
+            </motion.span>, we transform your special moments into beautifully crafted digital experiences. We are a done-for-you invitation design agency—meaning you simply share your vision, and we take care of everything from concept to final delivery.
+          </motion.p>
           
-          <p 
+          <motion.p
             ref={secondParaRef}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-center"
             style={{ fontFamily: 'var(--font-body)', color: 'var(--text-body)' }}
           >
-            We believe every celebration deserves more than just an invitation—it deserves a lasting impression. That's why we design custom invitation websites that not only inform but truly <span className="font-semibold italic" style={{ color: 'var(--text-heading)' }}>wow</span> your guests.
-          </p>
+            We believe every celebration deserves more than just an invitation—it deserves a lasting impression. That's why we design custom invitation websites that not only inform but truly <motion.span 
+              className="font-semibold italic" 
+              whileHover={{ 
+                scale: 1.1, 
+                rotate: [-2, 2, -2, 0],
+                transition: { duration: 0.4 }
+              }}
+              style={{ display: 'inline-block', color: 'var(--text-heading)' }}
+            >
+              wow
+            </motion.span> your guests.
+          </motion.p>
         </div>
       </div>
 
       {/* Horizontal Scrolling Cards - Full Width */}
       <div 
         style={{ 
-          height: isHorizontalComplete ? 'auto' : 'calc(100vh - 5rem)',
+          height: 'calc(100vh - 5rem)',
           width: '100vw',
-          position: isHorizontalComplete ? 'relative' : 'sticky',
-          top: isHorizontalComplete ? 'auto' : '5rem',
+          position: 'sticky',
+          top: '5rem',
           left: 0,
           overflow: 'hidden'
         }}
@@ -174,9 +198,22 @@ export default function About() {
             {cards.map((card, index) => {
               const Icon = card.Icon;
               return (
-                <div
+                <motion.div
                   key={index}
-                  className="flex-shrink-0 rounded-lg p-6 sm:p-8 backdrop-blur-sm"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ amount: 0.3 }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: index * 0.1,
+                    ease: [0.22, 1, 0.36, 1]
+                  }}
+                  whileHover={{ 
+                    y: -8,
+                    scale: 1.02,
+                    transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] }
+                  }}
+                  className="flex-shrink-0 rounded-lg p-6 sm:p-8 backdrop-blur-sm cursor-pointer"
                   style={{
                     width: `${cardWidth}px`,
                     minHeight: '280px',
@@ -186,29 +223,44 @@ export default function About() {
                     boxShadow: '0 4px 20px rgba(90, 74, 69, 0.08)'
                   }}
                 >
-                  <div className="mb-4 sm:mb-5">
+                  <motion.div 
+                    className="mb-4 sm:mb-5"
+                    whileHover={{ 
+                      rotate: [0, -10, 10, -10, 0],
+                      scale: 1.1,
+                      transition: { duration: 0.5 }
+                    }}
+                  >
                     <Icon 
                       size={cardWidth === 280 ? 28 : 32}
                       strokeWidth={1.5}
                       style={{ color: 'var(--btn-primary)' }}
                     />
-                  </div>
-                  <h3 
+                  </motion.div>
+                  <motion.h3 
                     className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3"
                     style={{ 
                       fontFamily: 'var(--font-heading)', 
                       color: 'var(--text-heading)' 
                     }}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ amount: 0.3 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 + 0.2 }}
                   >
                     {card.title}
-                  </h3>
-                  <p 
+                  </motion.h3>
+                  <motion.p 
                     className="text-sm sm:text-base leading-relaxed"
                     style={{ color: 'var(--text-body)' }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ amount: 0.3 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
                   >
                     {card.description}
-                  </p>
-                </div>
+                  </motion.p>
+                </motion.div>
               );
             })}
           </div>
