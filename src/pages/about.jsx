@@ -215,41 +215,6 @@ export default function About() {
         </div>
       </div>
 
-      {/* Next Section - Appears after horizontal scroll completes */}
-      <div 
-        className="px-4 sm:px-6 lg:px-8 transition-opacity duration-500"
-        style={{
-          opacity: isHorizontalComplete ? 1 : 0,
-          pointerEvents: isHorizontalComplete ? 'auto' : 'none',
-          marginTop: isHorizontalComplete ? '4rem' : '0'
-        }}
-      >
-        <div className="max-w-4xl mx-auto text-center py-12 sm:py-16">
-          <h3 
-            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6"
-            style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-heading)' }}
-          >
-            Ready to Create Something Special?
-          </h3>
-          <p 
-            className="text-base sm:text-lg md:text-xl leading-relaxed mb-8"
-            style={{ fontFamily: 'var(--font-body)', color: 'var(--text-body)' }}
-          >
-            Let's bring your celebration to life with a custom invitation that your guests will never forget.
-          </p>
-          <button
-            className="px-8 py-3 rounded-full text-base sm:text-lg font-semibold transition-all hover:scale-105"
-            style={{
-              backgroundColor: 'var(--btn-primary)',
-              color: 'white',
-              fontFamily: 'var(--font-body)',
-              boxShadow: '0 4px 14px rgba(90, 74, 69, 0.2)'
-            }}
-          >
-            Get Started
-          </button>
-        </div>
-      </div>
     </section>
   );
 }
