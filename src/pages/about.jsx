@@ -72,12 +72,17 @@ export default function About() {
       if (sectionRect.bottom < 0) return;
       
       if (paraReachedNavbar && typeof window !== 'undefined') {
-        const distanceFromNavbar = navbarHeight - paraRect.top;
+        // Ensure distanceFromNavbar is non-negative for safety
+        const distanceFromNavbar = Math.max(0, navbarHeight - paraRect.top);
         
-        // Calculate scroll needed to show all cards
-        const scrollMultiplier = window.innerHeight * 2.5;
+        // Calculate scroll needed to show all cards with smoother progression
+        const scrollMultiplier = window.innerHeight * 2.8;
         const progress = Math.min(distanceFromNavbar / scrollMultiplier, 1);
-        setScrollProgress(progress);
+        
+        // Apply smoothstep easing for better acceleration curve
+        const easedProgress = progress * progress * (3 - 2 * progress);
+        
+        setScrollProgress(easedProgress);
       } else if (!paraReachedNavbar) {
         setScrollProgress(0);
       }
