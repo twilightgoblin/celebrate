@@ -5,6 +5,7 @@ import Lenis from 'lenis';
 import Grainient from '../components/Grainient';
 import TextHighlighter from '@/components/ui/text-highlighter';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import About from './about';
 import Services from './services';
 import Work from './work';
@@ -129,6 +130,7 @@ export default function Hero() {
         <Services />
         <Work />
         <Process />
+        <Footer />
       </div>
     </>
   );
