@@ -1,14 +1,35 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Lenis from 'lenis';
 import Grainient from '../components/Grainient';
 import TextHighlighter from '@/components/ui/text-highlighter';
 import Navbar from '../components/Navbar';
 import About from './about';
+import Services from './services';
 
 export default function Hero() {
   const textRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check if window is available (SSR safety)
+    if (typeof window === 'undefined') return;
+
+    // Set initial mobile state
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    checkMobile();
+
+    // Add resize listener to update mobile state
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   useEffect(() => {
     // Initialize Lenis smooth scrolling
@@ -20,7 +41,7 @@ export default function Hero() {
     });
 
     // Handle scroll animation with Lenis
-    const handleScroll = (time) => {
+    const handleScroll = () => {
       if (!textRef.current) return;
       
       const scrollY = lenis.scroll;
@@ -29,8 +50,10 @@ export default function Hero() {
       // Move text upward faster - completes within 1 viewport height
       const translateY = -(scrollY * 1);
       
-      // Opacity decreases/increases much faster - fade completes within 30% of viewport
-      const opacity = Math.max(0, 1 - (scrollY / (windowHeight * 0.3)) * 1.5);
+      // On mobile, fade out faster to complete before 40vh spacer ends
+      // On desktop, use original 30vh fade distance
+      const fadeDistance = isMobile ? 0.2 : 0.3;
+      const opacity = Math.max(0, 1 - (scrollY / (windowHeight * fadeDistance)) * 1.5);
       
       textRef.current.style.transform = `translateY(${translateY}px)`;
       textRef.current.style.opacity = opacity;
@@ -38,7 +61,7 @@ export default function Hero() {
 
     function raf(time) {
       lenis.raf(time);
-      handleScroll(time);
+      handleScroll();
       requestAnimationFrame(raf);
     }
 
@@ -47,7 +70,7 @@ export default function Hero() {
     return () => {
       lenis.destroy();
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <>
@@ -96,11 +119,12 @@ export default function Hero() {
         </div>
       </div>
       {/* Add extra content to enable scrolling */}
-      <div style={{ height: '100vh', position: 'relative', zIndex: 2, pointerEvents: 'none' }}>
+      <div style={{ height: isMobile ? '40vh' : '100vh', position: 'relative', zIndex: 2, pointerEvents: 'none' }}>
         {/* Spacer for scroll effect */}
       </div>
       <div style={{ position: 'relative', zIndex: 2 }}>
         <About />
+        <Services />
       </div>
     </>
   );
