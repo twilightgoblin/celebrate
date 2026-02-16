@@ -16,7 +16,7 @@ export default function Navbar() {
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '#home' },
+    { name: 'Home', href: '/' },
     { name: 'About', href: '#about' },
     { name: 'Services', href: '#services' },
     { name: 'Our Work', href: '#work' },
@@ -25,6 +25,12 @@ export default function Navbar() {
   ];
 
   const handleNavClick = (e, href) => {
+    // If it's the home link, allow default navigation
+    if (href === '/') {
+      setMobileMenuOpen(false);
+      return;
+    }
+    
     e.preventDefault();
     const target = document.querySelector(href);
     if (target) {
@@ -54,8 +60,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between px-8 py-4">
             {/* Logo */}
             <a
-              href="#home"
-              onClick={(e) => handleNavClick(e, '#home')}
+              href="/"
               className="text-xl font-semibold tracking-tight hover:opacity-80 transition-opacity"
               style={{
                 fontFamily: 'var(--font-heading)',
