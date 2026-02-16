@@ -231,7 +231,7 @@ export default function Footer() {
                   }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  +1 (234) 567-890
+                 +91 9148505291
                 </motion.a>
               </motion.li>
               <motion.li 
@@ -258,7 +258,7 @@ export default function Footer() {
                     color: 'var(--text-body)' 
                   }}
                 >
-                  123 Celebration Ave, Suite 100
+                  Prashanth Nagar, Chikkaballapur
                 </p>
               </motion.li>
             </ul>

@@ -6,6 +6,7 @@ import Grainient from '../components/Grainient';
 import TextHighlighter from '@/components/ui/text-highlighter';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import CTA from '../components/CTA';
 import About from './about';
 import Services from './services';
 import Work from './work';
@@ -130,6 +131,7 @@ export default function Hero() {
         <Services />
         <Work />
         <Process />
+        <CTA />
         <Footer />
       </div>
     </>
