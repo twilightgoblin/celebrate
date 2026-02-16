@@ -50,10 +50,10 @@ export default function Hero() {
       // Move text upward faster - completes within 1 viewport height
       const translateY = -(scrollY * 1);
       
-      // On mobile, fade out faster to complete before 40vh spacer ends
+      // On mobile, fade out within the spacer distance
       // On desktop, use original 30vh fade distance
-      const fadeDistance = isMobile ? 0.2 : 0.3;
-      const opacity = Math.max(0, 1 - (scrollY / (windowHeight * fadeDistance)) * 1.5);
+      const fadeDistance = isMobile ? 0.4 : 0.3;
+      const opacity = Math.max(0, 1 - (scrollY / (windowHeight * fadeDistance)) * 1.2);
       
       textRef.current.style.transform = `translateY(${translateY}px)`;
       textRef.current.style.opacity = opacity;
@@ -119,7 +119,7 @@ export default function Hero() {
         </div>
       </div>
       {/* Add extra content to enable scrolling */}
-      <div style={{ height: isMobile ? '40vh' : '100vh', position: 'relative', zIndex: 2, pointerEvents: 'none' }}>
+      <div style={{ height: isMobile ? '70vh' : '100vh', position: 'relative', zIndex: 2, pointerEvents: 'none' }}>
         {/* Spacer for scroll effect */}
       </div>
       <div style={{ position: 'relative', zIndex: 2 }}>

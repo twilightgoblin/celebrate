@@ -120,7 +120,8 @@ export default function About() {
       style={{ 
         backgroundColor: 'transparent',
         background: 'linear-gradient(180deg, transparent 0%, rgba(255, 177, 153, 0.08) 2%, rgba(255, 200, 180, 0.25) 6%, rgba(255, 217, 199, 0.5) 12%, #FFD9C7 22%, #FFCDB5 50%, rgba(224, 122, 102, 0.15) 80%, rgba(224, 122, 102, 0.25) 100%)',
-        height: '450vh'
+        height: '450vh',
+        marginTop: '30vh'
       }}
     >
       <div className="max-w-4xl mx-auto pt-16 sm:pt-20 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8">
