@@ -8,6 +8,7 @@ import Navbar from '../components/Navbar';
 import About from './about';
 import Services from './services';
 import Work from './work';
+import Process from './process';
 
 export default function Hero() {
   const textRef = useRef(null);
@@ -127,6 +128,7 @@ export default function Hero() {
         <About />
         <Services />
         <Work />
+        <Process />
       </div>
     </>
   );
