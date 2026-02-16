@@ -56,7 +56,7 @@ export default function CTA() {
             className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center items-center"
           >
             <motion.a
-              href="#contact"
+              href="/contact"
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.98 }}
               className="group inline-flex items-center gap-2.5 px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-medium transition-all w-full sm:w-auto justify-center"
@@ -67,7 +67,7 @@ export default function CTA() {
                 boxShadow: '0 4px 16px rgba(243, 139, 117, 0.3)'
               }}
             >
-              Book Here
+              Book Now
               <motion.div
                 className="transition-transform group-hover:translate-x-1"
               >

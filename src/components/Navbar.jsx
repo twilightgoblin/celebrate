@@ -78,7 +78,8 @@ export default function Navbar() {
             </ul>
 
             {/* CTA Button */}
-            <button
+            <a
+              href="/contact"
               className="hidden md:block px-6 py-2 rounded-full font-medium text-sm transition-all duration-300 hover:shadow-lg"
               style={{
                 backgroundColor: 'var(--btn-primary)',
@@ -93,7 +94,7 @@ export default function Navbar() {
               }}
             >
               Get Started
-            </button>
+            </a>
 
             {/* Mobile Menu Button - Dots */}
             <button
@@ -168,8 +169,9 @@ export default function Navbar() {
                   </li>
                 ))}
               </ul>
-              <button
-                className="w-full mt-6 px-6 py-3 rounded-full font-medium text-sm transition-all duration-300"
+              <a
+                href="/contact"
+                className="w-full mt-6 px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 block text-center"
                 style={{
                   backgroundColor: 'var(--btn-primary)',
                   color: 'var(--text-heading)',
@@ -181,9 +183,10 @@ export default function Navbar() {
                 onMouseLeave={(e) => {
                   e.target.style.backgroundColor = 'var(--btn-primary)';
                 }}
+                onClick={() => setMobileMenuOpen(false)}
               >
                 Get Started
-              </button>
+              </a>
             </div>
           </div>
         </div>
