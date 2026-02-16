@@ -7,6 +7,7 @@ import TextHighlighter from '@/components/ui/text-highlighter';
 import Navbar from '../components/Navbar';
 import About from './about';
 import Services from './services';
+import Work from './work';
 
 export default function Hero() {
   const textRef = useRef(null);
@@ -125,6 +126,7 @@ export default function Hero() {
       <div style={{ position: 'relative', zIndex: 2 }}>
         <About />
         <Services />
+        <Work />
       </div>
     </>
   );

@@ -51,7 +51,7 @@ export default function Services() {
       className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-8"
       style={{ 
         backgroundColor: '#FFD9C7',
-        background: 'linear-gradient(180deg, rgba(224, 122, 102, 0.25) 0%, #FFCDB5 20%, #FFD9C7 50%, rgba(255, 200, 180, 0.3) 100%)'
+        background: 'linear-gradient(180deg, rgba(224, 122, 102, 0.25) 0%, #FFCDB5 20%, #FFD9C7 50%, rgba(255, 217, 199, 0.4) 100%)'
       }}
     >
       <div className="max-w-6xl mx-auto">
