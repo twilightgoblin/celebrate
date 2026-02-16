@@ -47,6 +47,7 @@ export default function Services() {
 
   return (
     <section 
+      id="services"
       ref={sectionRef}
       className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-8"
       style={{ 

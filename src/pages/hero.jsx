@@ -79,7 +79,7 @@ export default function Hero() {
   return (
     <>
       <Navbar />
-      <div style={{ width: '100%', height: '100vh', position: 'fixed', top: 0, left: 0, zIndex: 0 }}>
+      <div id="home" style={{ width: '100%', height: '100vh', position: 'fixed', top: 0, left: 0, zIndex: 0 }}>
         <Grainient
           color1="#FFD9C7"
           color2="#FFB199"

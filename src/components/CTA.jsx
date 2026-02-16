@@ -10,6 +10,7 @@ export default function CTA() {
 
   return (
     <section 
+      id="contact"
       ref={ctaRef}
       className="relative py-24 sm:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 flex items-center justify-center"
       style={{ 

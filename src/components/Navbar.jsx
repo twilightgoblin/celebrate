@@ -24,6 +24,15 @@ export default function Navbar() {
     { name: 'Contact', href: '#contact' },
   ];
 
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    setMobileMenuOpen(false);
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -46,6 +55,7 @@ export default function Navbar() {
             {/* Logo */}
             <a
               href="#home"
+              onClick={(e) => handleNavClick(e, '#home')}
               className="text-xl font-semibold tracking-tight hover:opacity-80 transition-opacity"
               style={{
                 fontFamily: 'var(--font-heading)',
@@ -61,6 +71,7 @@ export default function Navbar() {
                 <li key={item.name}>
                   <a
                     href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
                     className="text-sm font-medium hover:opacity-70 transition-opacity relative group"
                     style={{
                       fontFamily: 'var(--font-body)',
@@ -157,12 +168,12 @@ export default function Navbar() {
                   >
                     <a
                       href={item.href}
+                      onClick={(e) => handleNavClick(e, item.href)}
                       className="text-base font-medium hover:opacity-70 transition-opacity block"
                       style={{
                         fontFamily: 'var(--font-body)',
                         color: 'var(--text-body)',
                       }}
-                      onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}
                     </a>

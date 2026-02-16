@@ -115,6 +115,7 @@ export default function About() {
 
   return (
     <section 
+      id="about"
       ref={sectionRef}
       className="relative"
       style={{ 

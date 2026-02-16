@@ -43,6 +43,7 @@ export default function Process() {
 
   return (
     <section 
+      id="process"
       className="relative min-h-screen py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 flex items-center"
       style={{ 
         background: 'linear-gradient(180deg, rgba(255, 217, 199, 0.2) 0%, rgba(255, 217, 199, 0.4) 10%, #FFD9C7 25%, #FFD9C7 100%)'

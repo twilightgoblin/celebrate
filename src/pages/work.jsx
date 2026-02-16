@@ -59,6 +59,7 @@ export default function Work() {
 
   return (
     <section 
+      id="work"
       ref={sectionRef}
       className="relative min-h-screen py-20 sm:py-24 px-6 sm:px-8 lg:px-12 flex flex-col"
       style={{ 
