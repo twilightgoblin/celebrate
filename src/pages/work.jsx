@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useInView } from 'motion/react';
 import { Folder, FolderContent } from '@/components/ui/folder';
 
@@ -8,9 +8,15 @@ export default function Work() {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const subtitleRef = useRef(null);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [clickedFolders, setClickedFolders] = useState(new Set());
   
   const headingInView = useInView(headingRef, { amount: 0.3 });
   const subtitleInView = useInView(subtitleRef, { amount: 0.3 });
+
+  const handleFolderClick = (index) => {
+    setClickedFolders(prev => new Set([...prev, index]));
+  };
 
   const projects = [
     {
@@ -86,7 +92,7 @@ export default function Work() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-y-16 sm:gap-y-20 lg:gap-y-24 gap-x-8 sm:gap-x-12 lg:gap-x-16 flex-1 content-center max-w-6xl mx-auto w-full">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-y-16 sm:gap-y-20 lg:gap-y-32 gap-x-8 sm:gap-x-12 lg:gap-x-16 flex-1 content-center max-w-6xl mx-auto w-full">
           {projects.map((project, index) => (
             <motion.div
               key={index}
@@ -99,6 +105,9 @@ export default function Work() {
                 ease: [0.22, 1, 0.36, 1]
               }}
               className="flex flex-col items-center justify-center"
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              onClick={() => handleFolderClick(index)}
             >
               <Folder 
                 color={project.color} 
@@ -107,7 +116,21 @@ export default function Work() {
                 className="lg:hidden"
               >
                 <FolderContent>
-                  <div className="text-center px-1">
+                  <div className="text-center px-1 relative">
+                    {!clickedFolders.has(index) && hoveredIndex !== index && (
+                      <motion.p
+                        initial={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="text-[9px] mb-1"
+                        style={{ 
+                          fontFamily: 'var(--font-body)', 
+                          color: 'var(--btn-primary)',
+                          fontWeight: 500
+                        }}
+                      >
+                        Click me
+                      </motion.p>
+                    )}
                     <h3 
                       className="text-xs font-semibold mb-0.5"
                       style={{ 
