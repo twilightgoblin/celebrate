@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { Heart, Cake, Home, Briefcase } from 'lucide-react';
+import { Heart, Cake, Home, Briefcase, GraduationCap, Gift } from 'lucide-react';
 import { motion, useInView } from 'motion/react';
 
 export default function Services() {
@@ -32,6 +32,16 @@ export default function Services() {
       title: "Corporate Events",
       description: "Professional invitations for company gatherings, product launches, and corporate celebrations.",
       Icon: Briefcase
+    },
+    {
+      title: "Graduation Ceremonies",
+      description: "Mark academic achievements with memorable invitations for graduation parties and celebrations.",
+      Icon: GraduationCap
+    },
+    {
+      title: "Special Occasions",
+      description: "From anniversaries to retirement parties, create custom invitations for any celebration.",
+      Icon: Gift
     }
   ];
 
@@ -70,7 +80,7 @@ export default function Services() {
         </div>
 
         {/* Service Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => {
             const Icon = service.Icon;
             return (
