@@ -76,3 +76,4 @@ Deploy easily using the [Vercel Platform](https://vercel.com/new):
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/invite)
 
 Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
